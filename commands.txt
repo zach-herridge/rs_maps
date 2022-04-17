@@ -18,7 +18,8 @@ Band 1 Block=12544x1 Type=Byte, ColorInterp=Red
 Band 2 Block=12544x1 Type=Byte, ColorInterp=Green
 Band 3 Block=12544x1 Type=Byte, ColorInterp=Blue
 
-> gdal_translate -of VRT -a_srs EPSG:4326 -gcp 0 0 -180 90 -gcp 21600 0 180 90 -gcp 12544 45568 180 -90 full_image_0.png test.vrt
+> gdal_translate -of VRT -gcp 0 0 -180 90 -gcp 12544 0 180 90 -gcp 12544 45568 180 -90 full_image_0.png rs_0.vrt
+> gdal2tiles --xyz -p raster -z 0-11 -e rs_0.vrt tilemap
 
 > gdalinfo rs_0.vrt
 
@@ -59,3 +60,43 @@ Center      ( 6272.0,22784.0)
 Band 1 Block=128x128 Type=Byte, ColorInterp=Red
 Band 2 Block=128x128 Type=Byte, ColorInterp=Green
 Band 3 Block=128x128 Type=Byte, ColorInterp=Blue
+
+
+##MATH 
+lat = up/down aka y
+lon = around aka x
+
+
+tile width/height pixels = 4
+
+tile height deg
+lat: (90 * 2) / (45568 / 4) = 0.01580056179
+
+tile width deg:
+lon: (180 * 2) / (12544 / 4) = 0.11479591836
+
+rs offsets:
+x: 1152
+y: 1215
+
+
+3200, 3200
+
+
+
+lat/y calc:
+(3200)
+
+lon/x calc:
+((3200 - 1152) * 0.11479591836) - 180 = 55.1020408013
+
+
+
+
+
+
+
+
+
+
+
