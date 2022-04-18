@@ -91,7 +91,7 @@ lon/x calc:
 ((3200 - 1152) * 0.11479591836) - 180 = 55.1020408013
 
 
-
+gdal2tiles -p raster -w all --xyz -r average -a 0.0 rs_0.vrt n1
 
 
 
